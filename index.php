@@ -1,5 +1,10 @@
 <?php
 
+// Regulate input with allow list 0 and 1 to prevent SQL injection
+$allowed = array("0", "1");
+if(isset($_GET['complete']) && in_array($_GET['complete'], $allowed)){
+    $complete = $_GET['complete'];
+}
 //1. Create et connect database
 // Database information
 /*
@@ -25,7 +30,12 @@ if($db->connect_errno){
 // 2. Perform database query to display 1 entry
      // Data base table name : tasks
 
-     $sql = "SELECT * FROM  tasks ORDER BY priority ";
+     $sql = "SELECT * FROM  tasks ";
+     if(isset($complete)){
+        $sql .= "WHERE complete = {$complete} ";
+     }
+     $sql .= "ORDER BY priority";
+
      $result = $db->query($sql);
 
      // Test if query succeed
@@ -51,6 +61,13 @@ if($db->connect_errno){
 
     <section>
         <h2>Tasks list</h2>
+
+        <p>
+            <a href="index.php">All</a>
+            <a href="index.php?complete=1">Complete</a>
+            <a href="index.php?complete=0">Incomplete</a>
+            
+        </p>
 
         <table>
             <tr>
