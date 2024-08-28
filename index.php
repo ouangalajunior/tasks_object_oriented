@@ -25,7 +25,7 @@ if($db->connect_errno){
 // 2. Perform database query to display 1 entry
      // Data base table name : tasks
 
-     $sql = "SELECT * FROM  tasks LIMIT 1 ";
+     $sql = "SELECT * FROM  tasks ORDER BY priority ";
      $result = $db->query($sql);
 
      // Test if query succeed
@@ -33,7 +33,7 @@ if($db->connect_errno){
         exit("Database query failed");
      }
      // 3. Use returned data (if any)
-$task = $result->fetch_object();
+//$task = $result->fetch_all();
 
 ?>
 <!DOCTYPE html>
@@ -50,40 +50,40 @@ $task = $result->fetch_object();
 
 
     <section>
+        <h2>Tasks list</h2>
 
-<h1>Show Task</h1>
-    <!--Display one entry-->
-<dl>
-  <dt>ID</dt>
-  <dd><?php echo $task->id; ?></dd>
-</dl>
-<dl>
-  <dt>Priority</dt>
-  <dd><?php echo $task->id;  ?></dd>
-</dl>
-<dl>
-  <dt>Completed</dt>
-  <dd><?php echo $task->complete;  ?></dd>
-</dl>
-<dl>
-  <dt>Description</dt>
-  <dd><?php echo $task->description;  ?></dd>
-</dl>
+        <table>
+            <tr>
+                <th>ID</th>
+                <th>Priority</th>
+                <th>Completed</th>
+                <th>Description</th>
+                <th>Due Date</th>
+            </tr>
+            <?php
+            // Loop result query all result
+            ?>
+            <?php // foreach ($result as $task) { ?>
 
-<dl>
-  <dt>Due Date</dt>
-  <dd><?php echo $task->due_date;  ?></dd>
-</dl>
+            <?php while($task = $result->fetch_object()){?>
+                <tr>
+                    <td><?php echo $task ->id; ?> </td>
+                    <td><?php echo $task->priority ;?> </td>
+            <!-- Changing boolean 0 and 1 by true or false when task is completed-->
+                    <td><?php echo $task->complete == 1  ?  'true' : 'false';?> </td>
+                    <td><?php echo $task->description ;?> </td>
+                    <td><?php echo $task->due_date ;?> </td>
+                </tr>
+            <?php } ?>
+        </table>
+    </section>
 
-</section>
-
-    <?php 
+    <?php
     // 4. Release returned data
-    $result->free();
+    mysqli_free_result($result);
 
     //5. Close database connection
-    $db->close();
+    mysqli_close($db);
     ?>
-    
 </body>
 </html>
