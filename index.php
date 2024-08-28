@@ -43,7 +43,7 @@ if($db->connect_errno){
         exit("Database query failed");
      }
      // 3. Use returned data (if any)
-//$task = $result->fetch_all();
+//$task = $result->fetch_object();
 
 ?>
 <!DOCTYPE html>
@@ -76,6 +76,7 @@ if($db->connect_errno){
                 <th>Completed</th>
                 <th>Description</th>
                 <th>Due Date</th>
+                <th></th>
             </tr>
             <?php
             // Loop result query all result
@@ -90,6 +91,7 @@ if($db->connect_errno){
                     <td><?php echo $task->complete == 1  ?  'true' : 'false';?> </td>
                     <td><?php echo $task->description ;?> </td>
                     <td><?php echo $task->due_date ;?> </td>
+                    <td><a href="show.php?id=<?php echo $task->id; ?>">View</a></td>
                 </tr>
             <?php } ?>
         </table>
@@ -97,10 +99,10 @@ if($db->connect_errno){
 
     <?php
     // 4. Release returned data
-    mysqli_free_result($result);
+   $result->free();
 
     //5. Close database connection
-    mysqli_close($db);
+    $db->close();
     ?>
 </body>
 </html>
