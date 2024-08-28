@@ -85,6 +85,12 @@ if(is_null($task)){
         </dl>
 
     </section>
+
+
+<hr>
+<form action="delete.php?id=<?php echo $task->id ?>" method="post" onsubmit="return confirm('Delete this task?');">
+    <input type="submit" value="Delete Task">
+</form>
     
 </body>
 </html>

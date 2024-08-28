@@ -15,8 +15,7 @@ $id = isset($_GET['id']) ? (int)$_GET['id'] : 0;
 //1. Create database
 $db = mysqli_connect("127.0.0.1", "root", "", "php_learning", 3308);
 
-// Syntax mysqli_connect(host, username, password, dbname, port, socket)
-$db = new mysqli("127.0.0.1","root", "", "php_learning", 3308);
+
 
 // Test if connection succeed
 if($db->connect_errno){
