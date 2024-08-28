@@ -23,9 +23,6 @@ if($db->connect_errno){
     $msg .= $db->connect_error;
     $msg .= " (" .$db->connect_errno . ")";
     exit($msg);
-
-     
-
 }
 // 2. Perform database query to display 1 entry
      // Data base table name : tasks
@@ -57,7 +54,9 @@ if($db->connect_errno){
     <header>
         <h1> Task Managaer</h1>
     </header>
-
+<nav>
+    <a href="new.php">+ New Task</a>
+</nav>
 
     <section>
         <h2>Tasks list</h2>

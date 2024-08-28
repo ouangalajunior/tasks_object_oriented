@@ -54,6 +54,9 @@ if(is_null($task)){
         <h1>Task Manager</h1>
     </header>
 
+    <nav>
+    <a href="index.php">Task List</a>
+</nav>
     <section>
         <h1>Show task details</h1>
         <dl>
