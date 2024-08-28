@@ -76,6 +76,7 @@ if($db->connect_errno){
                 <th>Description</th>
                 <th>Due Date</th>
                 <th></th>
+                <th></th>
             </tr>
             <?php
             // Loop result query all result
@@ -91,6 +92,7 @@ if($db->connect_errno){
                     <td><?php echo $task->description ;?> </td>
                     <td><?php echo $task->due_date ;?> </td>
                     <td><a href="show.php?id=<?php echo $task->id; ?>">View</a></td>
+                    <td><a href="edit.php?id=<?php echo $task->id; ?>">Edit</a></td>
                 </tr>
             <?php } ?>
         </table>
